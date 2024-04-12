@@ -1,0 +1,72 @@
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (min-width: 768px) {
+        align-items: center;
+        flex-direction: row;
+    }
+}
+
+.card {
+    background-color: rgb(31, 31, 31);
+    color: white;
+    flex: 1;
+    border: 1px white solid;
+    border-radius: 5px;
+    margin: 15px 0;
+    font-size: clamp(0.1rem, 0.3rem + 2vw, 1rem);
+
+    .h5 {
+        font-size: 24px;
+        font-weight: 800;
+    }
+
+    .atributos {
+        text-align: start;
+    }
+
+    @media (min-width: 768px) {
+        max-width: 500px;
+        min-width: 400px;
+        margin: 15px;
+    }
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #9a9999;
+
+    .filterCheckboxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form-check {
+        display: flex;
+        margin: 0 10px;
+    }
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+.filterControls {
+    button {
+        margin: 0 15px;
+    }
+    .found {
+        margin-left: 10px;
+    }
+
+    .perPage {
+        margin-right: 10px;
+    }
+}
