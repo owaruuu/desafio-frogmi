@@ -20,6 +20,29 @@
   margin: 15px 0;
   font-size: clamp(0.1rem, 0.3rem + 2vw, 1rem);
 }
+.card .divider {
+  border-top: 1px white solid;
+}
+.card .comments {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "new show";
+  justify-content: center;
+  margin: 5px;
+}
+.card .comments .showButton {
+  grid-area: show;
+}
+.card .comments .newButton {
+  grid-area: new;
+}
+.card .comments button {
+  background-color: #3e3ec0;
+}
+.card .comments button:active {
+  background-color: #5d5ddd;
+}
 .card .h5 {
   font-size: 24px;
   font-weight: 800;
