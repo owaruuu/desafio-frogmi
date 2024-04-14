@@ -1,6 +1,26 @@
 require_relative "boot"
 
-require "rails/all"
+#action_mailbox/engine
+#active_storage/engine
+#action_mailer/railtie
+
+require "rails"
+
+%w(
+  active_record/railtie
+  action_controller/railtie
+  action_view/railtie
+  
+  active_job/railtie
+  action_cable/engine 
+  action_text/engine
+  rails/test_unit/railtie
+).each do |railtie|
+  begin # rubocop:disable Style/RedundantBegin
+    require railtie
+  rescue LoadError
+  end
+end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

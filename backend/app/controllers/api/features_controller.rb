@@ -19,7 +19,7 @@ class Api::FeaturesController < ApplicationController
     offset = (page - 1) * per_page
 
     if mag_types == nil
-      @features = Feature.order(time: :desc).limit(per_page).offset(offset)
+      @features = Feature.includes(:comments).order(time: :desc).limit(per_page).offset(offset)
     else
       @features = Feature.where(magType: mag_types).order(time: :desc).limit(per_page).offset(offset)
     end
@@ -44,7 +44,8 @@ class Api::FeaturesController < ApplicationController
           },
           links: {
             external_url: feature.url
-          }
+          },
+          comments: feature.comments
         }
     end
 
@@ -69,7 +70,7 @@ class Api::FeaturesController < ApplicationController
     @feature = Feature.new(feature_params)
 
     if @feature.save
-      render json: @feature, status: :created, location: @feature
+      render json: @feature, status: :created
     else
       render json: @feature.errors, status: :unprocessable_entity
     end
