@@ -1,15 +1,15 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import AllComments from "./AllComments";
-const CommentModal = ({ show, body, title, handleClose, comments }) => {
-    console.log("🚀 ~ CommentModal ~ comments:", comments);
+const CommentModal = ({ show, type, body, title, handleClose }) => {
     return (
-        <Modal show={show > 0} onHide={handleClose} className="modal show">
+        <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
+                <Modal.Title>
+                    {type == 1
+                        ? `"${title}" Comentarios:`
+                        : `Nuevo Comentario para "${title}"`}
+                </Modal.Title>
             </Modal.Header>
-
             <Modal.Body>{body}</Modal.Body>
         </Modal>
     );

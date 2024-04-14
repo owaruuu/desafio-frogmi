@@ -98,3 +98,46 @@
         margin-right: 10px;
     }
 }
+
+.modal-content {
+    background-color: rgb(31, 31, 31);
+    color: white;
+
+    .comment {
+        margin: 10px 0;
+    }
+
+    .btn-close {
+        filter: invert(1);
+    }
+
+    .bottomArea {
+        display: flex;
+        align-items: center;
+
+        button {
+            margin-right: 20px;
+        }
+    }
+}
+.commentDivider {
+    border-top: 1px white solid;
+}
+
+.newCommentForm {
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    button {
+        background-color: #3e3ec0;
+
+        &:active {
+            background-color: #5d5ddd;
+        }
+    }
+}

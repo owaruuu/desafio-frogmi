@@ -12,7 +12,7 @@ const MAG_TYPES = {
     mlg: "short-period surface wave",
 };
 
-const FeatureCard = ({ feature, showCommentsModal, showFormCommentsModal }) => {
+const FeatureCard = ({ feature, showCommentsModal, modalState }) => {
     return (
         <Card>
             <Card.Body>
@@ -49,14 +49,30 @@ const FeatureCard = ({ feature, showCommentsModal, showFormCommentsModal }) => {
                 <div className="comments">
                     <button
                         className="newButton"
-                        onClick={showFormCommentsModal}
+                        onClick={() =>
+                            showCommentsModal({
+                                show: true,
+                                type: 2,
+                                featureId: feature.id,
+                                featureTitle: feature.attributes.title,
+                                comments: [],
+                            })
+                        }
                     >
                         crear comentario
                     </button>
                     {feature.comments.length > 0 && (
                         <button
                             className="showButton"
-                            onClick={showCommentsModal}
+                            onClick={() =>
+                                showCommentsModal({
+                                    show: true,
+                                    type: 1,
+                                    featureId: feature.id,
+                                    featureTitle: feature.attributes.title,
+                                    comments: feature.comments,
+                                })
+                            }
                         >
                             ver comentarios
                         </button>

@@ -27,22 +27,32 @@ export async function getFeatures({ page, perPage, types }) {
     }
 }
 
+export async function postComment(content, featureId) {
+    if (content.trim().length == 0) {
+        throw new Error("el comentario debe tener contenido");
+    }
+
+    try {
+        const response = await api.post(
+            `${URL}/features/${featureId}/comments`,
+            { content }
+        );
+        console.log("🚀 ~ postCommnet ~ response:", response);
+        return response;
+    } catch (error) {
+        console.log("🚀 ~ postCommnet ~ error:", error);
+        throw error;
+    }
+}
+
 function constructURL(params) {
     let url = "";
 
     url = `page=${params.page}&per_page=${params.per_page}`;
-    // url = `?per_page=${params.per_page}&page=${params.page}`;
 
     for (const type in params.mag_type) {
-        // console.log(
-        //     "🚀 ~ constructURL ~ params.mag_type[type]:",
-        //     params.mag_type[type]
-        // );
         if (params.mag_type[type]) url += `&mag_type[]=${type}`;
     }
-    // params.mag_type.forEach((type) => {
-    //     url += `&mag_type[]=${type}`;
-    // });
 
     return url;
 }

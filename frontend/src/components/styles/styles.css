@@ -88,4 +88,41 @@
 }
 .filterControls .perPage {
   margin-right: 10px;
+}
+
+.modal-content {
+  background-color: rgb(31, 31, 31);
+  color: white;
+}
+.modal-content .comment {
+  margin: 10px 0;
+}
+.modal-content .btn-close {
+  filter: invert(1);
+}
+.modal-content .bottomArea {
+  display: flex;
+  align-items: center;
+}
+.modal-content .bottomArea button {
+  margin-right: 20px;
+}
+
+.commentDivider {
+  border-top: 1px white solid;
+}
+
+.newCommentForm {
+  display: flex;
+  flex-direction: column;
+}
+.newCommentForm textarea {
+  margin: 10px 0;
+  width: 100%;
+}
+.newCommentForm button {
+  background-color: #3e3ec0;
+}
+.newCommentForm button:active {
+  background-color: #5d5ddd;
 }/*# sourceMappingURL=styles.css.map */

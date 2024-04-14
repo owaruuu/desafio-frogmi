@@ -2,13 +2,14 @@ import React from "react";
 import "./styles/styles.css";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { getFeatures } from "../services/api";
+import { getFeatures, postComment } from "../services/api";
 import ListaTerremotos from "./ListaTerremotos";
 import FilterControls from "./FilterControls";
 import Pagination from "./Pagination";
 import FeatureCard from "./FeatureCard";
 import CommentModal from "./CommentModal";
 import AllComments from "./AllComments";
+import NewCommentForm from "./NewCommentForm";
 
 const Container = () => {
     const [filter, setFilter] = useState({
@@ -25,10 +26,43 @@ const Container = () => {
             mlg: false,
         },
     });
-    const [modal, setModal] = useState(0);
-    const handleClose = () => setModal(0);
-    const handleShow = () => setModal(1);
-    const handleShowForm = () => setModal(2);
+    const [modalState, setModalState] = useState({
+        show: false,
+        type: 0,
+        featureId: null,
+        featureTitle: "",
+        comments: [],
+    });
+    const handleModalState = (state) => {
+        console.log("open modal");
+        setModalState(state);
+    };
+    const handleCloseModal = () => {
+        setNewCommentMessage("");
+        setModalState({ ...modalState, show: false });
+    };
+
+    const handleNewComment = async (event) => {
+        event.preventDefault();
+        setThinking(true);
+        setNewCommentMessage("");
+        try {
+            const response = await postComment(
+                event.target.comment.value,
+                modalState.featureId
+            );
+            setThinking(false);
+            setNewCommentMessage("Comentario creado.");
+            refetch();
+        } catch (error) {
+            setThinking(false);
+            setNewCommentMessage("Hubo un error creando el comentario.");
+        }
+    };
+
+    //New comment form
+    const [thinking, setThinking] = useState(false);
+    const [newCommentMessage, setNewCommentMessage] = useState("");
 
     const queryFunction = () => {
         return getFeatures(filter);
@@ -75,8 +109,8 @@ const Container = () => {
             <FeatureCard
                 key={feature.id}
                 feature={feature}
-                showCommentsModal={handleShow}
-                showFormCommentsModal={handleShowForm}
+                modalState={modalState}
+                showCommentsModal={handleModalState}
             />
         ));
     }
@@ -107,12 +141,22 @@ const Container = () => {
                 error={error}
             />
             <CommentModal
-                show={modal}
-                handleClose={handleClose}
+                show={modalState.show}
+                title={modalState.featureTitle}
+                type={modalState.type}
+                comments={modalState.comments}
+                handleClose={handleCloseModal}
                 body={
-                    modal == 1 ? <AllComments comments={["1", "2", "3"]} /> : ""
+                    modalState.type == 1 ? (
+                        <AllComments comments={modalState.comments} />
+                    ) : (
+                        <NewCommentForm
+                            onSubmit={handleNewComment}
+                            thinking={thinking}
+                            message={newCommentMessage}
+                        />
+                    )
                 }
-                title={"Comments"}
             />
         </>
     );
