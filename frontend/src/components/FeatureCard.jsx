@@ -12,7 +12,7 @@ const MAG_TYPES = {
     mlg: "short-period surface wave",
 };
 
-const FeatureCard = ({ feature }) => {
+const FeatureCard = ({ feature, showCommentsModal, showFormCommentsModal }) => {
     return (
         <Card>
             <Card.Body>
@@ -47,9 +47,19 @@ const FeatureCard = ({ feature }) => {
                 </div>
                 <div className="divider"></div>
                 <div className="comments">
-                    <button className="newButton">crear comentario</button>
+                    <button
+                        className="newButton"
+                        onClick={showFormCommentsModal}
+                    >
+                        crear comentario
+                    </button>
                     {feature.comments.length > 0 && (
-                        <button className="showButton">ver comentarios</button>
+                        <button
+                            className="showButton"
+                            onClick={showCommentsModal}
+                        >
+                            ver comentarios
+                        </button>
                     )}
                 </div>
             </Card.Body>

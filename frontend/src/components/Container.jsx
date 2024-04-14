@@ -7,6 +7,8 @@ import ListaTerremotos from "./ListaTerremotos";
 import FilterControls from "./FilterControls";
 import Pagination from "./Pagination";
 import FeatureCard from "./FeatureCard";
+import CommentModal from "./CommentModal";
+import AllComments from "./AllComments";
 
 const Container = () => {
     const [filter, setFilter] = useState({
@@ -23,6 +25,10 @@ const Container = () => {
             mlg: false,
         },
     });
+    const [modal, setModal] = useState(0);
+    const handleClose = () => setModal(0);
+    const handleShow = () => setModal(1);
+    const handleShowForm = () => setModal(2);
 
     const queryFunction = () => {
         return getFeatures(filter);
@@ -66,7 +72,12 @@ const Container = () => {
     let features = "";
     if (isSuccess) {
         features = query.data.data.map((feature) => (
-            <FeatureCard key={feature.id} feature={feature} />
+            <FeatureCard
+                key={feature.id}
+                feature={feature}
+                showCommentsModal={handleShow}
+                showFormCommentsModal={handleShowForm}
+            />
         ));
     }
 
@@ -94,6 +105,14 @@ const Container = () => {
                 isLoading={isLoading}
                 isError={isError}
                 error={error}
+            />
+            <CommentModal
+                show={modal}
+                handleClose={handleClose}
+                body={
+                    modal == 1 ? <AllComments comments={["1", "2", "3"]} /> : ""
+                }
+                title={"Comments"}
             />
         </>
     );
