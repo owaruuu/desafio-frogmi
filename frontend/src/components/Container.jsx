@@ -34,7 +34,6 @@ const Container = () => {
         comments: [],
     });
     const handleModalState = (state) => {
-        console.log("open modal");
         setModalState(state);
     };
     const handleCloseModal = () => {
