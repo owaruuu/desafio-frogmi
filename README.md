@@ -28,6 +28,7 @@
 ### How to start
 
 -   Start terminal in /backend folder, run 'bundle install' to install dependencies.
+-   Run 'rails db:migrate' to start the database.
 -   Run 'rails fetch_data' to populate the local db.
 -   Run 'rails s' to start the backend server.
 -   Start terminal in /frontend folder, run 'npm i' to install dependencies
