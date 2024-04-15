@@ -9,7 +9,7 @@ const FilterControls = (props) => {
                 type={"checkbox"}
                 key={type}
                 id={type}
-                label={type}
+                label={type == "mw" ? `${type}*` : type}
                 checked={props.filter.types[type]}
                 onChange={() =>
                     props.setFilter((prev) => ({

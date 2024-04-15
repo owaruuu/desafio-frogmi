@@ -19,7 +19,7 @@ const Container = () => {
             md: false,
             ml: false,
             ms: false,
-            mw: false,
+            mw: false, // can be mww, mwc, mwb, mwr
             me: false,
             mi: false,
             mb: false,

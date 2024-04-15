@@ -45,11 +45,26 @@ export async function postComment(content, featureId) {
 
 function constructURL(params) {
     let url = "";
+    let magTypes = params.mag_type;
 
     url = `page=${params.page}&per_page=${params.per_page}`;
 
-    for (const type in params.mag_type) {
-        if (params.mag_type[type]) url += `&mag_type[]=${type}`;
+    //check for mw types
+    //mw can be mww, mwc, mwb, mwr
+    //solo hago esto por la discrepancia entre lo que pide el ejercicio y la informacion que tiene la api de features
+    if (magTypes["mw"]) {
+        magTypes = {
+            ...magTypes,
+            mw: false, //elimino el basico y agrego las variaciones
+            mww: true,
+            mwc: true,
+            mwb: true,
+            mwr: true,
+        };
+    }
+
+    for (const type in magTypes) {
+        if (magTypes[type]) url += `&mag_type[]=${type}`;
     }
 
     return url;

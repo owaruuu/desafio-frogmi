@@ -6,6 +6,10 @@ const MAG_TYPES = {
     ml: "local",
     ms: "20 sec surface wave",
     mw: "W phase",
+    mww: "Moment W-phase",
+    mwc: "Centroid W-phase",
+    mwb: "Body wave W-phase",
+    mwr: "Regional W-phase",
     me: "energy",
     mi: "integrated p-wave",
     mb: "short-period body wave",
@@ -23,9 +27,7 @@ const FeatureCard = ({ feature, showCommentsModal }) => {
                     <p>
                         Tipo magnitud: {feature.attributes.mag_type}
                         {" - "}
-                        {feature.attributes.mag_type.includes("mw")
-                            ? MAG_TYPES["mw"]
-                            : MAG_TYPES[feature.attributes.mag_type]}
+                        {MAG_TYPES[feature.attributes.mag_type]}
                     </p>
                     <p>Lugar: {feature.attributes.place}</p>
                     <p>
