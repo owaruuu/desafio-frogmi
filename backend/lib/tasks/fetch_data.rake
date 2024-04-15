@@ -10,7 +10,7 @@ task :fetch_data => :environment do
   response = Net::HTTP.get(uri)
   data = JSON.parse(response)
 
-  data['features'].first(30).each do |item|   
+  data['features'].each do |item|   
     if item['properties']['title'] == nil
       puts "Elemento ignorado, 'title' no puede ser nulo"
       next
@@ -46,6 +46,7 @@ task :fetch_data => :environment do
 
     new_record_created = false
 
+    # Create or Find
     feature = Feature.create_with(magnitude: item['properties']['mag'], place: item['properties']['place'], time: item['properties']['time'], url: item['properties']['url'], tsunami: item['properties']['tsunami'], magType: item['properties']['magType'], title: item['properties']['title'], longitude: item['geometry']['coordinates'][0], latitude: item['geometry']['coordinates'][1]).find_or_create_by(featureId: item['id']) do |feat|
       puts "Elemento agregado: #{item}"
       puts "\n"

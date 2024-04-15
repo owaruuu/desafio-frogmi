@@ -1,5 +1,4 @@
 class Api::CommentsController < ApplicationController
-  #  before_action :set_comment, only: %i[ show ]
 
    def index 
     @comment = Comment.where(feature_id: params[:feature_id])
@@ -19,9 +18,6 @@ class Api::CommentsController < ApplicationController
   end
 
   private
-  def set_comment
-    @comment = Comment.find(params[:feature_id])
-  end
   def comment_params
     params.require(:comment).permit(:content)
   end
