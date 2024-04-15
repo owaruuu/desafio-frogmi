@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
+
 const CommentModal = ({ show, type, body, title, handleClose }) => {
     return (
         <Modal show={show} onHide={handleClose}>

@@ -12,10 +12,8 @@ export async function getFeatures({ page, perPage, types }) {
         per_page: perPage,
         mag_type: types,
     };
-    console.log("🚀 ~ getFeatures ~ params:", params);
 
     let params_text = constructURL(params);
-    console.log("🚀 ~ getFeatures ~ params_text:", params_text);
 
     try {
         const response = await api.get(`${URL}/features?${params_text}`);

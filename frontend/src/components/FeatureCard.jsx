@@ -12,7 +12,7 @@ const MAG_TYPES = {
     mlg: "short-period surface wave",
 };
 
-const FeatureCard = ({ feature, showCommentsModal, modalState }) => {
+const FeatureCard = ({ feature, showCommentsModal }) => {
     return (
         <Card>
             <Card.Body>
